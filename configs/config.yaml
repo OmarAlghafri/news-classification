@@ -1,0 +1,54 @@
+# AG News Classification Configuration
+# Configuration file for training and evaluation
+
+# Model Configuration
+model:
+  pretrained_model: "gpt2"
+  num_labels: 4
+  dropout: 0.3
+
+# Training Configuration
+training:
+  batch_size: 16
+  learning_rate: 2.0e-5
+  epochs: 3
+  max_length: 512
+  seed: 42
+  
+  # Optimizer
+  optimizer: "adamw"
+  weight_decay: 0.01
+  grad_clip: 1.0
+  
+  # Scheduler
+  scheduler: "linear"
+  warmup_ratio: 0.1
+
+# Data Configuration
+data:
+  train_path: "/kaggle/input/ag-news-classification-dataset/train.csv"
+  test_path: "/kaggle/input/ag-news-classification-dataset/test.csv"
+  test_size: 0.2
+  val_size: 0.1
+  num_workers: 4
+
+# Device Configuration
+device:
+  use_cuda: true
+  cuda_device: 0
+
+# Logging Configuration
+logging:
+  log_interval: 10
+  save_dir: "results/"
+  save_best_only: true
+
+# Evaluation Configuration
+evaluation:
+  metrics:
+    - "accuracy"
+    - "precision"
+    - "recall"
+    - "f1"
+  plot_confusion_matrix: true
+  plot_per_class_metrics: true
